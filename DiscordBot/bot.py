@@ -86,7 +86,7 @@ async def on_message(message):
         await message.channel.send(tryingtoforce)
 
     if "!random" in message.content.lower():
-        randroll = f"{client.user.name} rolled ", random.randint(1, 100), "!"
+        randroll = f"{message.author} rolled {random.randint(1, 99)}!"
         await message.channel.send(randroll)
 
 
