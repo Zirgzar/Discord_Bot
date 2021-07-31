@@ -1,6 +1,8 @@
 import os
 import discord
 import random
+
+from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,8 +13,14 @@ GUILD = os.getenv("DISCORD_GUILD")
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
+bot = commands.Bot(command_prefix='!')
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user.name} has arrived!')
+
 """
-Need to find how to get intents working whil implementing class
+Need to find how to get intents working while implementing class
 
 class ScrubClient(discord.Client):
     async def on_ready(self):
@@ -74,23 +82,28 @@ async def on_message(message):
         "Bear, seek, seek, lest.",
         "Umbasa.",
     ]
-    tryingtoforce = "STFU biiiiiiitch!"
 
     if "help" in message.content.lower():
         response = random.choice(soulliners)
         await message.channel.send(response)
-    # elif message.content == "raise-exception":
-    # raise discord.DiscordException
-
-    if "raise-exception" in message.content.lower():
-        await message.channel.send(tryingtoforce)
 
     if "!random" in message.content.lower():
         randroll = f"{message.author} rolled {random.randint(1, 99)}!"
         await message.channel.send(randroll)
 
+        
+    """
+    Comment out raising error
 
-"""
+    tryingtoforce = "STFU biiiiiiitch!"
+    Raises exception
+    elif message.content == "raise-exception":
+    raise discord.DiscordException
+    
+
+    if "raise-exception" in message.content.lower():
+        await message.channel.send(tryingtoforce)
+
 Raise error
 
 @client.event
@@ -100,7 +113,7 @@ async def on_error(event, *args, **kwargs):
             f.write(f'Unhandled message: {args[0]}\n')
         else:
             raise
-"""
+    """
 
 
 # client = ScrubClient()
